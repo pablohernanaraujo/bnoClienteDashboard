@@ -1,0 +1,30 @@
+<div class="bg">
+  <div class="container white-text">
+    <div class="row">
+      <form
+        name="myformlogin"
+        ng-submit="userLogin()"
+        class="col m6 s12 offset-m6"
+        style="margin-top:200px"
+      >
+        <h4 class="center-align">Ingrese sus datos</h4>
+        <div class="input-field">
+          <input id="email" type="email" ng-model="user.email" required/>
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field">
+          <input id="password" type="password" ng-model="user.password" required/>
+          <label for="password">Password</label>
+        </div>
+        <button
+          type="submit"
+          class="waves-effect waves-light btn bg-principal"
+          style="width:100%"
+          ng-disabled="myformlogin.$invalid || authLoading"
+        >
+          Ingresar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

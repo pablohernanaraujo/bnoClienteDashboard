@@ -1,0 +1,84 @@
+<div class="container white-text">
+  <div class="row">
+    <h5 style="margin: 25px 0" class="color-principal">Datos personales</h5>
+    <div class="divider"></div>
+    <div class="section" style="position:relative; height:130px">
+      <a
+        ng-click="editar('eNombre')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Nombre</h5>
+      <p class="switchAnimation" ng-show="!eNombre">{{cliente.nombre}}</p>
+      <input
+        class="switchAnimation"
+        style="margin-top:2px"
+        ng-show="eNombre"
+        ng-model="cliente.nombre"
+        ng-change="cliente.$save()"
+        id="nombre"
+        type="text"
+      />
+    </div>
+    <div class="divider"></div>
+    <div class="section" style="position:relative; height:130px">
+      <a
+        ng-click="editar('eApellido')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Apellido</h5>
+      <p class="switchAnimation" ng-show="!eApellido">{{cliente.apellido}}</p>
+      <input
+        class="switchAnimation"
+        style="margin-top:2px"
+        ng-show="eApellido"
+        ng-model="cliente.apellido"
+        ng-change="cliente.$save()"
+        id="apellido"
+        type="text"
+      />
+    </div>
+    <div class="divider"></div>
+    <h5 style="margin: 25px 0" class="color-principal">Crea un nuevo lugar</h5>
+    <form
+      name="myformlugar"
+      ng-submit="crearLugar()"
+    >
+      <div class="input-field">
+        <i class="material-icons prefix">place</i>
+        <input
+          id="lugar"
+          type="text"
+          ng-model="lugar"
+          required
+        />
+        <label id="lugarLabel" for="lugar">Ingrese el nombre del lugar</label>
+      </div>
+      <button
+        type="submit"
+        class="waves-effect waves-light btn bg-principal"
+        style="width: 100%"
+        ng-disabled="myformlugar.$invalid || authLoading"
+      >
+        crear
+      </button>
+    </form>
+    <h5 style="margin: 25px 0" class="color-principal">Lista de lugares</h5>
+    <div ng-show="lugares" class="collection">
+      <a
+        href="#/dashboard/{{place.key}}"
+        class="collection-item bg-segundo white-text"
+        ng-repeat="place in lugares"
+      >
+        {{place.nombre}}
+      </a>
+    </div>
+    <p ng-show="!lugares">No tienes ningun lugar creado</p>
+  </div>
+
+</div>

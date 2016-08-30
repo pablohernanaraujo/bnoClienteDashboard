@@ -1,0 +1,43 @@
+<div class="bg">
+  <div class="container white-text">
+    <div class="row">
+      <form
+        name="myformregister"
+        ng-submit="userRegister()"
+        class="col m6 s12 offset-m6"
+        style="margin-top:200px"
+      >
+        <h4 class="center-align">Registrarse</h4>
+        <div class="input-field">
+          <input id="nombre" type="text" ng-model="user.nombre" required/>
+          <label for="nombre">Nombre</label>
+        </div>
+        <div class="input-field">
+          <input id="apellido" type="text" ng-model="user.apellido" required/>
+          <label for="apellido">Apellido</label>
+        </div>
+        <div class="input-field">
+          <input id="email" type="email" ng-model="user.email" required/>
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field">
+          <input id="password" type="password" ng-model="user.password" required/>
+          <label for="password">Password</label>
+        </div>
+        <div class="input-field">
+          <input id="passwordConfirm" name="passwordConfirm" type="password" ng-model="passwordConfirm" match="user.password" match-ignore-empty="true" required/>
+          <label for="passwordConfirm">Confirmar contraseña</label>
+        </div>
+        <div class="match" ng-show="myformregister.passwordConfirm.$error.match">Contraseña no concuerda!</div>
+        <button
+          type="submit"
+          class="waves-effect waves-light btn bg-principal"
+          style="width:100%"
+          ng-disabled="myformregister.$invalid || authLoading"
+        >
+          Ingresar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

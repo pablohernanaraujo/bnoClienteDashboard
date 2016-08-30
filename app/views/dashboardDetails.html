@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col m4">
+    <h5 style="margin: 70px 0 25px" class="color-principal">Vista previa</h5>
+    <div class="divider"></div>
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s3"><a class="active" href="#test1">Lista</a></li>
+          <li class="tab col s3"><a href="#test2">Individual</a></li>
+        </ul>
+      </div>
+      <div id="test1" class="col s12">
+        <div class="centrarImagen">
+          <img class="responsive-img" src="../images/privadoDisco.png">
+        </div>
+      </div>
+      <div id="test2" class="col s12">
+        <dic class="centrarImagen">
+          <img class="responsive-img" src="../images/privadoIndividual.png">
+        </dic>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m8 white-text">
+    <a class="waves-effect waves-light btn bg-principal" style="margin-top: 10px" href="#/dashboard">
+      <i class="material-icons left">keyboard_arrow_left</i>
+      Volver
+    </a>
+    <h5 style="margin: 25px 0" class="color-principal">Lugar datos</h5>
+
+    <div class="divider"></div>
+    <div class="section" style="position:relative; height:130px">
+      <a
+        ng-click="editar('eNombre')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Nombre</h5>
+      <p class="switchAnimation" ng-show="!eNombre">{{lugar.nombre}}</p>
+      <input
+        class="switchAnimation"
+        style="margin-top:2px"
+        ng-show="eNombre"
+        ng-model="lugar.nombre"
+        ng-change="lugar.$save()"
+        id="nombre"
+        type="text"
+      />
+    </div>
+    <div class="divider"></div>
+
+    <div class="section" style="position:relative; height:130px">
+      <a
+        ng-click="editar('eTipo')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Tipo <span>Debe seleccionar un tipo de lugar en editar modo.</span></h5>
+      <p class="switchAnimation" ng-show="!eTipo">{{lugar.tipo}}</p>
+      <div class="switchAnimation" input-field ng-show="eTipo" style="width:100%;margin-top:-12px">
+        <select ng-change="lugar.$save()" ng-model="lugar.tipo" material-select watch>
+          <option value="" disabled selected>Seleciona una opcion</option>
+          <option value="Disco">Disco</option>
+          <option value="Bar">Bar</option>
+        </select>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+
+  </div>
+</div>
