@@ -22,6 +22,12 @@ angular
     'ui.materialize',
     'validation.match'
   ])
+  .run(function($window) {
+    angular.element(document).ready(function () {
+      console.log('page loading completed');
+      $('.se-pre-con').fadeOut('slow');
+    });
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
