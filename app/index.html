@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="dashApp" ng-show="cargoTodo" ng-cloak>
+  <body ng-app="dashApp">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -27,35 +27,38 @@
       <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="color:#7986cb"></i>
     </div>
 
-    <nav
-      class="transparent z-depth-0"
-      style="z-index:9999; position:relative"
-      ng-controller="DashboardCtrl"
-      ng-cloak
-    >
-      <div class="nav-wrapper">
-        <div class="brand-logo"></div>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul ng-show="navegador" class="right hide-on-med-and-down">
-          <li class="active"><a ng-click="userLogout()">Salir</a></li>
-        </ul>
-        <span class="right" style="padding:0 10px">{{currentUser.nombre}} {{currentUser.apellido}}</span>
-        <ul ng-show="!navegador" class="right hide-on-med-and-down">
-          <li ng-class="{ active: PAGE === 'ingresar'}"><a href="#/">Ingresar</a></li>
-          <li ng-class="{ active: PAGE === 'registrarse'}"><a ng-href="#/registrarse">Registrarse</a></li>
-        </ul>
 
-        <ul ng-show="navegador" class="side-nav" id="mobile-demo">
-          <li class="active"><a ng-click="userLogout()">Salir</a></li>
-        </ul>
-        <ul ng-show="!navegador" class="side-nav" id="mobile-demo">
-          <li data-activates="mobile-demo" ng-class="{ active: PAGE === 'ingresar'}"><a href="#/">Ingresar</a></li>
-          <li ng-class="{ active: PAGE === 'registrarse'}"><a ng-href="#/registrarse">Registrarse</a></li>
-        </ul>
-      </div>
-    </nav>
+    <div>
+      <nav
+        class="transparent z-depth-0"
+        style="z-index:9999; position:relative"
+        ng-controller="DashboardCtrl"
+        ng-cloak
+      >
+        <div class="nav-wrapper">
+          <div class="brand-logo"></div>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul ng-show="navegador" class="right hide-on-med-and-down">
+            <li class="active"><a ng-click="userLogout()">Salir</a></li>
+          </ul>
+          <span class="right" style="padding:0 10px">{{currentUser.nombre}} {{currentUser.apellido}}</span>
+          <ul ng-show="!navegador" class="right hide-on-med-and-down">
+            <li ng-class="{ active: PAGE === 'ingresar'}"><a href="#/">Ingresar</a></li>
+            <li ng-class="{ active: PAGE === 'registrarse'}"><a ng-href="#/registrarse">Registrarse</a></li>
+          </ul>
 
-    <div ng-view=""></div>
+          <ul ng-show="navegador" class="side-nav" id="mobile-demo">
+            <li class="active"><a ng-click="userLogout()">Salir</a></li>
+          </ul>
+          <ul ng-show="!navegador" class="side-nav" id="mobile-demo">
+            <li data-activates="mobile-demo" ng-class="{ active: PAGE === 'ingresar'}"><a href="#/">Ingresar</a></li>
+            <li ng-class="{ active: PAGE === 'registrarse'}"><a ng-href="#/registrarse">Registrarse</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div ng-view=""></div>
+    </div>
+
 
 
 
