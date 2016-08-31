@@ -12,6 +12,12 @@ angular.module('dashApp')
         var cliente = firebase.database().ref('/clientes/' + $rootScope.clienteUid);
         $scope.cliente = $firebaseObject(cliente);
 
+        $interval.cancel(intervalClient);
+      }
+    };
+
+    var findLugares = function(){
+      if($scope.cliente){
         $timeout(function(){
           var lugares = firebase.database().ref('/lugares/' + $rootScope.clienteUid)
             .on('value', function(snapshot) {
@@ -23,13 +29,16 @@ angular.module('dashApp')
               }
             });
         },10);
-
-        $interval.cancel(intervalClient);
+        $interval.cancel(intervalLugares);
       }
     };
 
     var intervalClient = $interval(function(){
       findClient();
+    },200);
+
+    var intervalLugares = $interval(function(){
+      findLugares();
     },200);
 
     var actual;
