@@ -24,8 +24,17 @@ angular
   ])
   .run(function($window) {
     angular.element(document).ready(function () {
-      console.log('page loading completed');
-      $('.se-pre-con').fadeOut('slow');
+      // $('.se-pre-con').fadeOut('slow');
+      var image = new Image();
+      image.onload = function () {
+         console.info('Image loaded !');
+         $('.se-pre-con').fadeOut('slow');
+      };
+      image.onerror = function () {
+         console.error('Cannot load image');
+         //do something else...
+      };
+      image.src = '/images/fondoInicio.jpg';
     });
   })
   .config(function ($routeProvider) {

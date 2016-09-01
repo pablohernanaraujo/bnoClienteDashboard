@@ -18,20 +18,19 @@ angular.module('dashApp')
 
     var findLugares = function(){
       if($scope.cliente){
-        $timeout(function(){
-          var lugares = firebase.database().ref('/lugares/' + $rootScope.clienteUid)
-            .on('value', function(snapshot) {
-              var places = snapshot.val();
-              if(places !== null){
-                $scope.lugares = places;
-              }else{
-                $scope.lugares = false;
-              }
-            });
-        },10);
+        var lugares = firebase.database().ref('/lugares/' + $rootScope.clienteUid)
+          .on('value', function(snapshot) {
+            var places = snapshot.val();
+            $scope.lugares = places;
+          });
+
         $interval.cancel(intervalLugares);
       }
     };
+
+    $scope.$watch('lugares', function (newValue, oldValue, scope) {
+      $scope.lugares = newValue;
+    });
 
     var intervalClient = $interval(function(){
       findClient();

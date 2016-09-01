@@ -78,6 +78,7 @@ select:-webkit-autofill:focus {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
 .switchAnimation{
   opacity: 1;
   position: absolute;
@@ -89,6 +90,19 @@ select:-webkit-autofill:focus {
 }
 
 .switchAnimation.ng-hide {
+  opacity: 0;
+}
+
+.page-animate{
+  opacity: 1;
+}
+
+.page-animate.ng-hide-add,
+.page-animate.ng-hide-remove {
+  transition: opacity linear 0.3s;
+}
+
+.page-animate.ng-hide {
   opacity: 0;
 }
 
