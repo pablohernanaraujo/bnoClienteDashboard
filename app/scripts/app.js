@@ -20,21 +20,19 @@ angular
     'ngTouch',
     'firebase',
     'ui.materialize',
-    'validation.match'
+    'validation.match',
+    'ng-file-model'
   ])
   .run(function($window) {
     angular.element(document).ready(function () {
-      // $('.se-pre-con').fadeOut('slow');
       var image = new Image();
       image.onload = function () {
-         console.info('Image loaded !');
          $('.se-pre-con').fadeOut('slow');
       };
       image.onerror = function () {
          console.error('Cannot load image');
-         //do something else...
       };
-      image.src = '/images/fondoInicio.jpg';
+      image.src = 'images/fondoInicio.jpg';
     });
   })
   .config(function ($routeProvider) {

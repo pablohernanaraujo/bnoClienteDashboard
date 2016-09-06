@@ -9,6 +9,14 @@ body {
   padding: 0;
   background-color: rgb(15, 15, 15);
   font-weight: 300;
+  overflow-y: hidden;
+}
+
+nav{
+  position: absolute !important;
+  top: 0;
+  padding-right:17px;
+  box-sizing: border-box;
 }
 
 .bg{
@@ -147,8 +155,104 @@ nav ul li.active{
   padding-top: 20px;
 }
 
+.fakeNav{
+  width: 100%;
+  height: 65px;
+}
+
+.detallesScroll{
+  height: 100vh;
+  overflow-y: auto;
+}
+
+#map{
+  height: 400px;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(15, 15, 15, 0) inset !important;
+}
+
+.lugarItem{
+  height: 20px;
+  width: 100%;
+  height: 40px;
+  margin: 0 0 6px;
+}
+
+.lugarItemA {
+  background-color: #00aeef;
+  color: white;
+  display: block;
+  padding: 8px;
+}
+
+.dashboardPadding{
+  padding: 0 200px;
+}
+
+.divider:last-child{
+  margin-bottom: 100px;
+}
+
+.individualContenedor::-webkit-scrollbar{
+  width: 0px;
+}
+
+.individualContenedor::-webkit-scrollbar-track-piece{
+    background-color: transparent;
+    -webkit-border-radius: 6px;
+}
+
+#test1{
+	overflow: hidden;
+	position: relative;
+}
+
+/*.individualContenedor{
+	width: 262px;
+	height: 402px;
+	position: absolute;
+	margin-top: 30px;
+	margin-left: -1px;
+  overflow: scroll;
+	overflow-x: hidden;
+	background-color: rgba(15,15,15,1.00);
+}*/
+
+.lista{
+	width: 262px;
+	height: 107px;
+	position: absolute;
+	margin-top: -114px;
+	margin-left: -1px;
+	background-color: rgba(15,15,15,1.00);
+}
+
+.lista .listaImagen{
+	width: 75px;
+	height: 90px;
+	padding: 10px;
+	float: left;
+}
+
+.lista .listaImagen img{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
 @media screen and (max-width: 992px){
   .brand-logo{
     margin-left: 0px;
+  }
+  .dashboardPadding{
+    padding: 0 100px;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .dashboardPadding{
+    padding: 0 20px;
   }
 }

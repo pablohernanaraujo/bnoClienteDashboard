@@ -17,7 +17,8 @@
     "firebase": "^3.3.0",
     "components-font-awesome": "^4.6.3",
     "angular-materialize": "^0.2.1",
-    "angular-validation-match": "^1.9.0"
+    "angular-validation-match": "^1.9.0",
+    "ng-file-model": "*"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

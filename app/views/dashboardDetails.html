@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="col m4">
+  <div class="col s12 m4">
+    <div class="fakeNav"></div>
     <h3 style="margin: 70px 0 25px" class="color-principal">Vista previa</h3>
     <div class="divider"></div>
     <div class="row">
@@ -12,6 +13,14 @@
       <div id="test1" class="col s12">
         <div class="centrarImagen">
           <img class="responsive-img" src="images/privadoDisco.png">
+          <div class="lista">
+
+	        	<div class="listaImagen">
+	        		<img ng-show="lugar.logo" ng-src="{{lugar.logo.data}}" alt="">
+	        		<img ng-show="!lugar.logo" src="./images/logoPredeterminado.jpg" alt="">
+	        	</div>
+
+          </div>
         </div>
       </div>
       <div id="test2" class="col s12">
@@ -21,7 +30,8 @@
       </div>
     </div>
   </div>
-  <div class="col s12 m8 white-text">
+  <div class="col s12 m8 white-text detallesScroll">
+    <div class="fakeNav"></div>
     <a class="waves-effect waves-light btn bg-principal" style="margin-top: 10px" href="#/dashboard">
       <i class="material-icons left">keyboard_arrow_left</i>
       Volver
@@ -54,7 +64,7 @@
     <div class="section" style="position:relative; height:130px">
       <a
         ng-click="editar('eTipo')"
-        class="btn-floating waves-effect waves-light bg-principal"
+        class="btn-floating waves-effect waves-light bg-principal switchAnimation"
         style="position:absolute;right:10px;top:10px"
       >
         <i class="material-icons">mode_edit</i>
@@ -69,8 +79,110 @@
         </select>
       </div>
     </div>
+
     <div class="divider"></div>
 
+    <div class="section" style="position:relative; min-height:130px">
+      <a
+        ng-show="lugar.direccion"
+        ng-click="editar('eDireccion')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Dirección <span>Debe ingresar una dirección, la numeración debe ser sin puntos intermedios.</span></h5>
+
+      <p class="switchAnimation" ng-show="!eDireccion">{{lugar.direccion}}</p>
+
+      <div class="switchAnimation" ng-show="eDireccion || !lugar.direccion" style="width:100%; position:relative">
+        <form
+          style="padding:0 20px"
+          name="myformsearch"
+          ng-submit="search()"
+        >
+          <div class="input-field">
+            <input id="direccion" type="text" ng-model="buscarDireccion" required>
+            <label id="direccionLabel" for="direccion">Ejemplo: Av Rivadavia 2356</label>
+            <button
+              type="submit"
+              class="waves-effect waves-light btn bg-principal"
+              style="width:100%;margin-bottom:20px"
+    			    ng-disabled="myformsearch.$invalid || authLoading"
+            >
+              Buscar
+            </button>
+          </div>
+        </form>
+
+        <div id="map"></div>
+        <p style="margin: 15px 0;font-size:18px">Si la dirección es correcta, guardela.</p>
+        <a
+          class="waves-effect waves-light btn bg-principal"
+          style="width:100%;margin-bottom:20px"
+          ng-click="guardarDireccion()"
+        >
+          Guardar
+        </a>
+
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" style="position:relative; min-height:130px">
+      <h5>Estilo de música</h5>
+
+      <form
+        style="padding:0 20px"
+        name="myformmusic"
+        ng-submit="music()"
+      >
+        <div class="input-field">
+          <input id="music" type="text" ng-model="agregarMusica" autocomplete="off" required>
+          <label id="musicLabel" for="music">Ejemplo: Dance</label>
+          <button
+            type="submit"
+            class="waves-effect waves-light btn bg-principal"
+            style="width:100%;margin-bottom:20px"
+            ng-disabled="myformmusic.$invalid || authLoading"
+          >
+            Agregar
+          </button>
+        </div>
+      </form>
+
+      <div style="width:100%;padding:0 80px">
+        <ul class="collection" ng-show="lugar.musicas">
+          <li class="collection-item grey darken-4" ng-repeat="music in lugar.musicas">{{music.estilo}}
+            <a ng-click="eliminarMusica(music)"
+              class="btn-floating btn waves-effect waves-light red right"
+              style="margin-top:-7px"
+            >
+              <i class="material-icons">delete</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" style="position:relative; min-height:130px">
+      <h5>Logo</h5>
+      <h6>Nombre</h6><p>{{lugar.logo.name}}</p>
+      <div class="file-field input-field">
+        <div class="btn bg-principal">
+        	<span>File</span>
+        	<input type="file" ng-file-model="loguito">
+        </div>
+        <div class="file-path-wrapper">
+        	<input class="file-path" type="text">
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
 
   </div>
 </div>

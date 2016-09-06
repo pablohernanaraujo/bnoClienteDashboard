@@ -88,7 +88,7 @@ angular
           key: key
         };
 
-         myRef.set(newData);
+        myRef.set(newData);
 
         $rootScope.authLoading = false;
       },
@@ -102,6 +102,7 @@ angular
       				nombre: cliente.nombre,
       				apellido: cliente.apellido,
       				email: cliente.email,
+              date: firebase.database.ServerValue.TIMESTAMP,
       				status: 1
             });
             $rootScope.authLoading = false;

@@ -13,6 +13,7 @@
   "globals": {
     "angular": false,
     "Materialize": false,
-    "$": false
+    "$": false,
+    "google": false
   }
 }

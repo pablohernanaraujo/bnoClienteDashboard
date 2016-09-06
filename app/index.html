@@ -16,8 +16,9 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsDNAwAYh8pbarPkuU1vgQqZNSzShl0XE&amp;libraries=places"></script>
   </head>
-  <body ng-app="dashApp">
+  <body ng-app="dashApp" ng-cloak>
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -28,10 +29,10 @@
     </div>
 
     <nav
+      ng-show="cargoTodo"
       class="transparent z-depth-0"
       style="z-index:9999; position:relative"
       ng-controller="DashboardCtrl"
-      ng-cloak
     >
       <div class="nav-wrapper">
         <div class="brand-logo"></div>
@@ -54,7 +55,7 @@
         </ul>
       </div>
     </nav>
-    <div ng-view="" ng-cloak></div>
+    <div ng-view="" ng-cloak ng-show="cargoTodo"></div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
@@ -85,6 +86,7 @@
     <script src="bower_components/materialize/bin/materialize.js"></script>
     <script src="bower_components/angular-materialize/src/angular-materialize.js"></script>
     <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+    <script src="bower_components/ng-file-model/ng-file-model.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -96,6 +98,7 @@
         <script src="scripts/controllers/dashboardDetails.js"></script>
 
         <script src="scripts/services/authentication.js"></script>
+        <script src="scripts/services/map.js"></script>
         <script>
           $(document).ready(() => {
             $(".button-collapse").sideNav();

@@ -21,7 +21,9 @@ angular.module('dashApp')
         var lugares = firebase.database().ref('/lugares/' + $rootScope.clienteUid)
           .on('value', function(snapshot) {
             var places = snapshot.val();
-            $scope.lugares = places;
+            $timeout(function(){
+              $scope.lugares = places;
+            },100);
           });
 
         $interval.cancel(intervalLugares);
@@ -77,10 +79,22 @@ angular.module('dashApp')
       $('#lugarLabel').toggleClass('active');
   	};
 
+    $scope.deleteModal = function(abrirCerrar, place){
+      $scope.modal = place;
+      if(abrirCerrar === 'abrir'){
+        $('#modal1').openModal();
+      }
+      if(abrirCerrar === 'eliminar'){
+        firebase.database().ref('/lugares/' + $rootScope.clienteUid).child(place.key).remove();
+        Materialize.toast('Eliminado con exito!', 4000, 'green'); 
+      }
+    };
+
     $(document).ready(function(){
      $('.collapsible').collapsible({
        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
      });
+     $('.modal-trigger').leanModal();
    });
 
   });
