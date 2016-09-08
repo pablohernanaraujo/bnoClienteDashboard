@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col s12 m4">
+  <div class="col s12 m4 movileScroll">
     <div class="fakeNav"></div>
     <h3 style="margin: 70px 0 25px" class="color-principal">Vista previa</h3>
     <div class="divider"></div>
@@ -7,7 +7,7 @@
       <div class="col s12">
         <ul class="tabs">
           <li class="tab col s3"><a class="active" href="#test1">Lista</a></li>
-          <li class="tab col s3"><a href="#test2">Individual</a></li>
+          <li class="tab col s3" ng-click="saberAlto()"><a href="#test2">Individual</a></li>
         </ul>
       </div>
       <div id="test1" class="col s12">
@@ -16,17 +16,68 @@
           <div class="lista">
 
 	        	<div class="listaImagen">
-	        		<img ng-show="lugar.logo" ng-src="{{lugar.logo.data}}" alt="">
-	        		<img ng-show="!lugar.logo" src="./images/logoPredeterminado.jpg" alt="">
+	        		<img ng-show="lugar.logo" ng-src="{{lugar.logo.data}}" alt="lugar.logo.name">
+	        		<img ng-show="!lugar.logo" src="./images/logoPredeterminado.jpg" alt="logo predeterminado">
 	        	</div>
+
+            <div class="listaNombre">
+              <span ng-show="!lugar.nombre">Nombre del lugar</span>
+              <span ng-show="lugar.nombre">{{lugar.nombre}}</span>
+            </div>
+
+            <div class="listaDireccion">
+              <span ng-show="!lugar.direccion">Dirección</span>
+              <span ng-show="lugar.direccion">{{lugar.direccion}}</span>
+            </div>
+
+            <div class="listaMusica">
+              <span ng-show="!lugar.musicas">Música</span>
+              <span ng-show="lugar.musicas">
+                <div ng-repeat="musica in lugar.musicas">{{musica.estilo}}&nbsp;</div>
+              </span>
+            </div>
 
           </div>
         </div>
       </div>
       <div id="test2" class="col s12">
-        <dic class="centrarImagen">
+        <div class="centrarImagen">
           <img class="responsive-img" src="images/privadoIndividual.png">
-        </dic>
+          <div class="individual">
+            <div class="individualContenedor" id="individual">
+              <div class="individualCard" id="tarjeta">
+                <div class="individualEncabezado">
+
+                  <div class="individualLogo">
+                    <img ng-show="lugar.logo" ng-src="{{lugar.logo.data}}" alt="lugar.logo.name">
+                    <img ng-show="!lugar.logo" src="./images/logoPredeterminado.jpg" alt="logo predeterminado">
+                  </div>
+
+                  <div class="individualNombre">
+                    <span ng-show="!lugar.nombre">Nombre del lugar</span>
+                    <span ng-show="lugar.nombre">{{lugar.nombre}}</span>
+                  </div>
+
+                  <div class="individualDireccion">
+                    <span ng-show="!lugar.direccion">Dirección</span>
+                    <span ng-show="lugar.direccion">{{lugar.direccion}}</span>
+                  </div>
+
+                </div>
+
+                <div class="individualImagen">
+                  <img ng-show="lugar.imagen" ng-src="{{lugar.imagen.data}}" alt="lugar.imagen.name">
+                  <img ng-show="!lugar.imagen" src="./images/imagenPredeterminado.jpg" alt="imagen predeterminado">
+                </div>
+
+                <div class="individualCuerpo">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -170,18 +221,162 @@
     <div class="divider"></div>
 
     <div class="section" style="position:relative; min-height:130px">
-      <h5>Logo</h5>
-      <h6>Nombre</h6><p>{{lugar.logo.name}}</p>
-      <div class="file-field input-field">
-        <div class="btn bg-principal">
-        	<span>File</span>
-        	<input type="file" ng-file-model="loguito">
-        </div>
-        <div class="file-path-wrapper">
-        	<input class="file-path" type="text">
-        </div>
+      <a
+        ng-click="editar('eAniversario')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Aniversario</h5>
+      <div ng-show="!eAniversario" class="switchAnimation">
+        <span><strong>Fecha : </strong></span><span>{{lugar.aniversario}}</span>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div input-field class="col s4">
+        <select class="" ng-model="dia" material-select watch>
+          <option value="" disabled selected>Elige un dia</option>
+          <option ng-repeat="dia in dias">{{dia}}</option>
+        </select>
+      </div>
+
+      <div input-field class="col s4">
+        <select class="" ng-model="mes" material-select watch>
+          <option value="" disabled selected>Elige un mes</option>
+          <option ng-repeat="mes in meses">{{mes}}</option>
+        </select>
+      </div>
+
+      <div input-field class="col s4">
+        <select class="" ng-model="ano" material-select watch>
+          <option value="" disabled selected>Elige un año</option>
+          <option ng-repeat="ano in anos">{{ano}}</option>
+        </select>
       </div>
     </div>
+
+    <div class="divider"></div>
+
+    <div class="section" style="position:relative; min-height:130px">
+      <a
+        ng-click="editar('eLogo')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Logo <span>Debes guardar para previsualizar.</span></h5>
+      <div ng-show="!eLogo" class="switchAnimation">
+        <span><strong>Nombre : </strong></span><span>{{lugar.logo.name}}</span>
+      </div>
+
+      <div class="switchAnimation" ng-show="eLogo"
+        style="width:100%; margin-bottom:15px; position:relative"
+      >
+        <div  class="file-field input-field">
+          <div class="btn bg-principal">
+          	<span>File</span>
+          	<input type="file" ng-file-model="loguito">
+          </div>
+          <div class="file-path-wrapper">
+          	<input class="file-path" type="text">
+          </div>
+        </div>
+        <a ng-click="guardarLogo()" class="waves-effect waves-light btn bg-principal" style="width:100%">guardar</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" style="position:relative; min-height:130px">
+      <a
+        ng-show="lugar.direccion"
+        ng-click="editar('eTextologo')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Texto del logo <span>Ingrese un texto para el logo.</span></h5>
+
+      <p ng-show="!eTextologo" class="switchAnimation">{{lugar.textologo}}</p>
+
+      <div class="input-field" ng-show="eTextologo">
+        <input
+          id="textologo"
+          class="switchAnimation"
+          style="margin-top:-2px; position:relative"
+          ng-model="lugar.textologo"
+          ng-change="lugar.$save()"
+          type="text"
+        >
+        <label for="textologo">Ingrese un texto</label>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" style="position:relative; min-height:130px">
+      <a
+        ng-click="editar('eImagen')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Imagen <span>Debes guardar para previsualizar.</span></h5>
+      <div ng-show="!eImagen" class="switchAnimation">
+        <span><strong>Nombre : </strong></span><span>{{lugar.imagen.name}}</span>
+      </div>
+
+      <div class="switchAnimation" ng-show="eImagen"
+        style="width:100%; margin-bottom:15px; position:relative"
+      >
+        <div  class="file-field input-field">
+          <div class="btn bg-principal">
+          	<span>File</span>
+          	<input type="file" ng-file-model="imagensita">
+          </div>
+          <div class="file-path-wrapper">
+          	<input class="file-path" type="text">
+          </div>
+        </div>
+        <a ng-click="guardarImagen()" class="waves-effect waves-light btn bg-principal" style="width:100%">guardar</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" style="position:relative; min-height:130px">
+      <a
+        ng-show="lugar.direccion"
+        ng-click="editar('eTextoimagen')"
+        class="btn-floating waves-effect waves-light bg-principal"
+        style="position:absolute;right:10px;top:10px"
+      >
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <h5>Texto del imagen <span>Ingrese un texto para el imagen.</span></h5>
+
+      <p ng-show="!eTextoimagen" class="switchAnimation">{{lugar.textoimagen}}</p>
+
+      <div class="input-field" ng-show="eTextoimagen">
+        <textarea
+          id="textoimagen"
+          class="materialize-textarea switchAnimation"
+          style="margin-top:-2px; position:relative"
+          ng-model="lugar.textoimagen"
+          ng-change="lugar.$save()"
+          ></textarea>
+        <label for="textoimagen">Ingrese un texto</label>
+      </div>
+
+    </div>
+
     <div class="divider"></div>
 
   </div>

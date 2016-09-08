@@ -12,6 +12,10 @@ angular.module('dashApp')
       $scope.eNombre = false;
       $scope.eTipo = false;
       $scope.eDireccion = false;
+      $scope.eLogo = false;
+      $scope.eTextologo = false;
+      $scope.eImagen = false;
+      $scope.eTextoimagen = false;
 
       if(actual !== edi){
         actual = edi;
@@ -26,16 +30,39 @@ angular.module('dashApp')
             break;
           case 'eDireccion':
             $scope.eDireccion = true;
+            $timeout(function(){
+              Map.init();
+            },100);
             break;
+          case 'eLogo':
+              $scope.eLogo = true;
+              break;
+          case 'eTextologo':
+              $scope.eTextologo = true;
+              break;
+          case 'eImagen':
+              $scope.eImagen = true;
+              break;
+          case 'eTextoimagen':
+              $scope.eTextoimagen = true;
+              break;
           default:
             $scope.eNombre = false;
             $scope.eTipo = false;
             $scope.eDireccion = false;
+            $scope.eLogo = false;
+            $scope.eTextologo = false;
+            $scope.eImagen = false;
+            $scope.eTextoimagen = false;
         }
       }else{
         $scope.eNombre = false;
         $scope.eTipo = false;
         $scope.eDireccion = false;
+        $scope.eLogo = false;
+        $scope.eTextologo = false;
+        $scope.eImagen = false;
+        $scope.eTextoimagen = false;
 
         actual = '';
       }
@@ -97,16 +124,28 @@ angular.module('dashApp')
       firebase.database().ref('/lugares/' + $rootScope.clienteUid + '/' + $routeParams.id).child('musicas').child(music.key).remove();
     };
 
-    // $scope.$watch(
-    //   'loguito',
-    //   function( newValue, oldValue ) {
-    //       // $scope.lugar.logo = newValue;
-    //       // $scope.lugar.$save();
-    //   }
-    // );
+    $scope.guardarLogo = function(){
+      $scope.lugar.logo = $scope.loguito;
+      $scope.lugar.$save();
+    };
+
+    $scope.guardarImagen = function(){
+      $scope.lugar.imagen = $scope.imagensita;
+      $scope.lugar.$save();
+    };
+
+    $scope.saberAlto = function(){
+      var tarjeta = document.getElementById('individual').offsetHeight;
+      console.log(tarjeta);
+    };
+
+    $scope.dias = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28,29,30,31];
+    $scope.meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    $scope.anos = [2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980];
 
     $(document).ready(function() {
       $('select').material_select();
       $('ul.tabs').tabs();
+
     });
   });
