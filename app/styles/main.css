@@ -264,7 +264,7 @@ input:-webkit-autofill {
 
 .individualContenedor{
   width: 100%;
-  /*height: 600px;*/
+  height: 407px;
   display: flex;
   justify-content: center;
   overflow: auto;
@@ -319,8 +319,15 @@ input:-webkit-autofill {
 
 .individualCuerpo{
   width: 100%;
-  height: 400px;
+  min-height: 100px;
   background-color: coral;
+}
+
+.individualPie{
+  width: 100%;
+  height: 75px;
+  background-color: lightblue;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 992px){
