@@ -4,11 +4,20 @@ angular
   .module('dashApp')
   .factory('Authentication', function ( $rootScope, firebase, $firebaseObject, $location, $timeout ) {
 
+    // VIEJA FIREBASE
+    // var firebaseConfig = {
+    //   apiKey: 'AIzaSyAwP6I2Nfx0G-pb6yp_Jm389xpUW2GjJRc',
+    //   authDomain: 'bno.firebaseapp.com',
+    //   databaseURL: 'https://bno.firebaseio.com',
+    //   storageBucket: 'firebase-bno.appspot.com',
+    // };
+
     var firebaseConfig = {
-      apiKey: 'AIzaSyAwP6I2Nfx0G-pb6yp_Jm389xpUW2GjJRc',
-      authDomain: 'bno.firebaseapp.com',
-      databaseURL: 'https://bno.firebaseio.com',
-      storageBucket: 'firebase-bno.appspot.com',
+      apiKey: 'AIzaSyBehsFdvvDHW60NGBlF0lAs_OJCZi7eXIY',
+      authDomain: 'bno-firebase.firebaseapp.com',
+      databaseURL: 'https://bno-firebase.firebaseio.com',
+      storageBucket: 'bno-firebase.appspot.com',
+      messagingSenderId: '853361409695'
     };
 
     var firebaseApp = firebase.initializeApp(firebaseConfig);
