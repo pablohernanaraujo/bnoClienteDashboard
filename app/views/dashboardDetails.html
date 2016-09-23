@@ -16,7 +16,7 @@
           <div class="lista">
 
 	        	<div class="listaImagen">
-	        		<img ng-show="lugar.logo" ng-src="{{lugar.logo.data}}" alt="lugar.logo.name">
+	        		<img ng-show="lugar.logo" ng-src="{{lugar.logo.url}}" alt="lugar.logo.nombre">
 	        		<img ng-show="!lugar.logo" src="./images/logoPredeterminado.jpg" alt="logo predeterminado">
 	        	</div>
 
@@ -49,7 +49,7 @@
                 <div class="individualEncabezado">
 
                   <div class="individualLogo">
-                    <img ng-show="lugar.logo" ng-src="{{lugar.logo.data}}" alt="lugar.logo.name">
+                    <img ng-show="lugar.logo" ng-src="{{lugar.logo.url}}" alt="lugar.logo.nombre">
                     <img ng-show="!lugar.logo" src="./images/logoPredeterminado.jpg" alt="logo predeterminado">
                   </div>
 
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="individualImagen">
-                  <img ng-show="lugar.imagen" ng-src="{{lugar.imagen.data}}" alt="lugar.imagen.name">
+                  <img ng-show="lugar.imagen" ng-src="{{lugar.imagen.url}}">
                   <img ng-show="!lugar.imagen" src="./images/imagenPredeterminado.jpg" alt="imagen predeterminado">
                 </div>
 
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="individualPie">
-                  
+
                 </div>
 
               </div>
@@ -272,24 +272,40 @@
       >
         <i class="material-icons">mode_edit</i>
       </a>
-      <h5>Logo <span>Debes guardar para previsualizar.</span></h5>
+      <h5>Logo <span>El logo debe ser maximo 100x100 y solo JPG o PNG.</span></h5>
       <div ng-show="!eLogo" class="switchAnimation">
-        <span><strong>Nombre : </strong></span><span>{{lugar.logo.name}}</span>
+        <span><strong>Nombre : </strong></span><span>{{lugar.logo.nombre}}</span>
       </div>
 
       <div class="switchAnimation" ng-show="eLogo"
         style="width:100%; margin-bottom:15px; position:relative"
       >
-        <div  class="file-field input-field">
-          <div class="btn bg-principal">
-          	<span>File</span>
-          	<input type="file" ng-file-model="loguito">
+
+        <form name="myLogoForm">
+          <div  class="file-field input-field">
+            <div class="btn bg-principal">
+            	<span>File</span>
+            	<input image-with-preview id="loguito" type="file" name="loguito" ng-model="loguito" dimensions="height < 101 && width < 101" accept="image/jpeg,image/png" />
+            </div>
+            <div class="file-path-wrapper">
+            	<input class="file-path" type="text">
+            </div>
           </div>
-          <div class="file-path-wrapper">
-          	<input class="file-path" type="text">
+          <button ng-disabled="myLogoForm.$invalid" ng-click="guardarLogo()" class="waves-effect waves-light btn bg-principal" style="width:100%">guardar</button ng-disabled="myformlugar.$invalid || authLoading">
+          <span style="color: red; font-size: 14px; padding-top: 10px" ng-show="myLogoForm.loguito.$error.image">
+              La imagen debe ser formato JPEG o PNG!
+          </span>
+          <span style="color: red; font-size: 14px; padding-top: 10px" ng-show="myLogoForm.loguito.$error.dimensions">
+              La imagen debe tener 100x100 maximo!
+          </span>
+          <div ng-show="loguito.src" class="preLogo">
+            <span>Previsualizacion del logo</span>
+            <div class="preLogoImg">
+              <img  ng-src="{{loguito.src}}"/>
+            </div>
           </div>
-        </div>
-        <a ng-click="guardarLogo()" class="waves-effect waves-light btn bg-principal" style="width:100%">guardar</a>
+        </form>
+
       </div>
     </div>
 
@@ -332,24 +348,40 @@
       >
         <i class="material-icons">mode_edit</i>
       </a>
-      <h5>Imagen <span>Debes guardar para previsualizar.</span></h5>
+      <h5>Imagen <span>La imagen debe ser maximo 400x600 y solo JPG.</span></h5>
       <div ng-show="!eImagen" class="switchAnimation">
-        <span><strong>Nombre : </strong></span><span>{{lugar.imagen.name}}</span>
+        <span><strong>Nombre : </strong></span><span>{{lugar.imagen.nombre}}</span>
       </div>
 
       <div class="switchAnimation" ng-show="eImagen"
         style="width:100%; margin-bottom:15px; position:relative"
       >
-        <div  class="file-field input-field">
-          <div class="btn bg-principal">
-          	<span>File</span>
-          	<input type="file" ng-file-model="imagensita">
+
+        <form name="myImageForm">
+          <div  class="file-field input-field">
+            <div class="btn bg-principal">
+            	<span>File</span>
+            	<input image-with-preview id="imagensita" name="imagensita" type="file" ng-model="imagensita" dimensions="height < 601 && width < 401" accept="image/jpeg">
+            </div>
+            <div class="file-path-wrapper">
+            	<input class="file-path" type="text">
+            </div>
           </div>
-          <div class="file-path-wrapper">
-          	<input class="file-path" type="text">
+          <button ng-disabled="myImageForm.$invalid" ng-click="guardarImagen()" class="waves-effect waves-light btn bg-principal" style="width:100%">guardar</button>
+          <span style="color: red; font-size: 14px; padding-top: 10px" ng-show="myImageForm.imagensita.$error.image">
+              La imagen debe ser formato JPEG!
+          </span>
+          <span style="color: red; font-size: 14px; padding-top: 10px" ng-show="myImageForm.imagensita.$error.dimensions">
+              La imagen debe tener 400x600 maximo!
+          </span>
+          <div ng-show="imagensita.src" class="preImage">
+            <span>Previsualizacion de la imagen</span>
+            <div class="preImageImg">
+              <img  ng-src="{{imagensita.src}}"/>
+            </div>
           </div>
-        </div>
-        <a ng-click="guardarImagen()" class="waves-effect waves-light btn bg-principal" style="width:100%">guardar</a>
+        </form>
+
       </div>
     </div>
 

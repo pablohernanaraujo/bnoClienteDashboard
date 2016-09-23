@@ -191,10 +191,6 @@ input:-webkit-autofill {
   padding: 0 200px;
 }
 
-.divider:last-child{
-  margin-bottom: 100px;
-}
-
 .individualContenedor::-webkit-scrollbar{
   width: 0px;
 }
@@ -328,6 +324,53 @@ input:-webkit-autofill {
   height: 75px;
   background-color: lightblue;
   margin-bottom: 20px;
+}
+
+.preLogo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.preLogo span{
+  font-size: 20px;
+}
+
+.preLogoImg{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 20px;
+}
+
+.preLogoImg img{
+  width: 70px;
+  height: 70px;
+}
+
+.preImage{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.preImage span{
+  font-size: 20px;
+}
+
+.preImageImg{
+  width: 400px;
+  height: 600px;
+  overflow: hidden;
+  margin-left: 20px;
+}
+
+.preImageImg img{
+  width: 400px;
+  height: 600px;
 }
 
 @media screen and (max-width: 992px){

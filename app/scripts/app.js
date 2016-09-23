@@ -21,7 +21,7 @@ angular
     'firebase',
     'ui.materialize',
     'validation.match',
-    'ng-file-model'
+    'ngImageInputWithPreview'
   ])
   .run(function($window) {
     angular.element(document).ready(function () {

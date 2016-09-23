@@ -4,14 +4,6 @@ angular
   .module('dashApp')
   .factory('Authentication', function ( $rootScope, firebase, $firebaseObject, $location, $timeout ) {
 
-    // VIEJA FIREBASE
-    // var firebaseConfig = {
-    //   apiKey: 'AIzaSyAwP6I2Nfx0G-pb6yp_Jm389xpUW2GjJRc',
-    //   authDomain: 'bno.firebaseapp.com',
-    //   databaseURL: 'https://bno.firebaseio.com',
-    //   storageBucket: 'firebase-bno.appspot.com',
-    // };
-
     var firebaseConfig = {
       apiKey: 'AIzaSyBehsFdvvDHW60NGBlF0lAs_OJCZi7eXIY',
       authDomain: 'bno-firebase.firebaseapp.com',
@@ -23,6 +15,7 @@ angular
     var firebaseApp = firebase.initializeApp(firebaseConfig);
     var firebaseAuth = firebaseApp.auth();
     var firebaseDb = firebaseApp.database();
+    var firebaseST = firebase.storage();
 
     firebaseAuth.onAuthStateChanged(function(user) {
       if (user) {
@@ -88,8 +81,8 @@ angular
       crearLugar: function(lugar){
         $rootScope.authLoading = true;
 
-        var myRef = firebaseDb.ref('lugares/' + $rootScope.clienteUid).push();
-        var key = myRef.key;
+        var lugarRef = firebaseDb.ref('lugares/' + $rootScope.clienteUid).push();
+        var key = lugarRef.key;
 
         var newData={
           nombre: lugar,
@@ -97,7 +90,7 @@ angular
           key: key
         };
 
-        myRef.set(newData);
+        lugarRef.set(newData);
 
         $rootScope.authLoading = false;
       },
@@ -122,6 +115,68 @@ angular
             Materialize.toast( error.message , 4000, 'red lighten-1');
             $rootScope.authLoading = false;
           });
+      },
+      subirLogo: function(logo, refLugar){
+        var guardarLogo = firebaseST.ref().child('logos/' + logo.name).put(logo);
+
+        guardarLogo.on('state_changed', function(snapshot){
+          // Observe state change events such as progress, pause, and resume
+          // See below for more detail
+        }, function(error) {
+          console.log(error);
+          Materialize.toast( error.message , 4000, 'red lighten-1');
+        }, function() {
+          var user = firebase.auth().currentUser;
+          var downloadURL = guardarLogo.snapshot.downloadURL;
+          refLugar.update({
+            logo: {
+              url: downloadURL,
+              nombre: logo.name,
+              size: logo.size
+            }
+          });
+
+          var logosStorage = firebaseDb.ref('logos/' + user.uid).push({
+            logo: {
+              url: downloadURL,
+              nombre: logo.name,
+              size: logo.size
+            }
+          });
+
+          Materialize.toast( 'Logo guardado exitosamente' , 4000, 'green lighten-1');
+
+        });
+      },
+      subirImagen: function(imagen, refLugar){
+        var guardarImagen = firebaseST.ref().child('imagenes/' + imagen.name).put(imagen);
+
+        guardarImagen.on('state_changed', function(snapshot){
+        }, function(error) {
+          console.log(error);
+          Materialize.toast( error.message , 4000, 'red lighten-1');
+        }, function() {
+          var user = firebase.auth().currentUser;
+          var downloadURL = guardarImagen.snapshot.downloadURL;
+          refLugar.update({
+            imagen: {
+              url: downloadURL,
+              nombre: imagen.name,
+              size: imagen.size
+            }
+          });
+
+          var imagenesStorage = firebaseDb.ref('imagenes/' + user.uid).push({
+            imagen: {
+              url: downloadURL,
+              nombre: imagen.name,
+              size: imagen.size
+            }
+          });
+
+          Materialize.toast( 'Imagen guardada exitosamente' , 4000, 'green lighten-1');
+
+        });
       }
     };
   });

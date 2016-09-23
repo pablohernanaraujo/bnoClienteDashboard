@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dashApp')
-  .controller('DashboardDetailsCtrl', function ( $rootScope, $scope, firebase, $firebaseObject, $routeParams, $timeout, Map ) {
+  .controller('DashboardDetailsCtrl', function ( $rootScope, $scope, firebase, $firebaseObject, $routeParams, $timeout, Map, Authentication ) {
 
     var refLugar = firebase.database().ref('/lugares/' + $rootScope.clienteUid + '/' + $routeParams.id);
     $scope.lugar = $firebaseObject(refLugar);
@@ -125,18 +125,36 @@ angular.module('dashApp')
     };
 
     $scope.guardarLogo = function(){
-      $scope.lugar.logo = $scope.loguito;
-      $scope.lugar.$save();
+      Materialize.toast( 'Guardando logo...' , 4000);
+      var file    = document.querySelector('input[type=file]').files[0];
+      var reader  = new FileReader();
+
+      if (file) {
+        reader.readAsDataURL(file);
+        $scope.srcLogo = file;
+        Authentication.subirLogo(file, refLugar);
+      } else {
+        $scope.srcLogo = '';
+      }
     };
 
     $scope.guardarImagen = function(){
-      $scope.lugar.imagen = $scope.imagensita;
-      $scope.lugar.$save();
+      Materialize.toast( 'Guardando imagen...' , 4000);
+      var file    = document.getElementById('imagensita').files[0];
+      var reader  = new FileReader();
+
+      if (file) {
+        reader.readAsDataURL(file);
+        $scope.srcImagen = file;
+        Authentication.subirImagen(file, refLugar);
+      } else {
+        $scope.srcImagen = '';
+      }
     };
 
     $scope.dias = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28,29,30,31];
     $scope.meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-    $scope.anos = [2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980];
+    $scope.anos = [2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980];
 
     $(document).ready(function() {
       $('select').material_select();
